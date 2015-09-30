@@ -22,11 +22,9 @@ X, y = make_blobs(centers=[[0, 0], [1, 1]], random_state=61526, n_samples=50)
 def tree_image(tree, fout=None):
     try:
         import pydot
+        import a_reliable_dot_rendering
     except ImportError:
-        # make a hacky white plot
-        x = np.ones((10, 10))
-        x[0, 0] = 0
-        return x
+        return None
     dot_data = StringIO()
     export_graphviz(tree, out_file=dot_data)
     data = re.sub(r"gini = 0\.[0-9]+\\n", "", dot_data.getvalue())
@@ -58,8 +56,12 @@ def plot_tree(max_depth=1):
         ax[0].contourf(xx, yy, Z, alpha=.4)
         ax[0].scatter(xx[border], yy[border], marker='.', s=1)
         ax[0].set_title("max_depth = %d" % max_depth)
-        ax[1].imshow(tree_image(tree))
-        ax[1].axis("off")
+        img = tree_image(tree)
+        if img is not None:
+            ax[1].imshow(i)
+            ax[1].axis("off")
+        else:
+            ax[1].set_visible(False)
     else:
         ax[0].set_title("data set")
         ax[1].set_visible(False)
