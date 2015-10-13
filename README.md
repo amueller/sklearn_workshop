@@ -1,2 +1,2 @@
-# Astro Hackweek Machine Learning Material
-Jupyter notebooks for astro-hackweek
+# Material for Scikit-learn workshop
+Jupyter notebooks for an interactive scikit-learn workshop with exercises and solutions.
